@@ -9,10 +9,10 @@ class TwitterClient():
 
     def __init__(self): 
  
-        consumer_key = 'If3ljZl8ECSi2v3IBxBg8iZEk'
-        consumer_secret = 'g1N2eRo5peUBZkEWAXJTCSIg0Pxg49FPI9a94KF939gi5mfysn'
-        access_token = '1167253468165206016-rS16iSgUMZhPzNCEAlp60n5dUwc4Ds'
-        access_token_secret = 'dvtBvEIrhnJMsLRchwpZzXIFOnInflOlABRUK4wn5fHdf'
+        consumer_key = '#############################  enter your ###########################'
+        consumer_secret = '#############################  enter your ###########################'
+        access_token = '#############################  enter your ###########################'
+        access_token_secret = '#############################  enter your ###########################'
 
         self.polarity = []
         self.count = 0
