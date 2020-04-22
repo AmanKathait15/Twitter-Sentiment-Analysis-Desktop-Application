@@ -14,10 +14,13 @@ class TwitterClient():
 
     def __init__(self): 
  
-        consumer_key = '######################################'
-        consumer_secret = '####################################'
-        access_token = '############################################'
-        access_token_secret = '######################################'
+        consumer_key = 'If3ljZl8ECSi2v3IBxBg8iZEk'
+        
+        consumer_secret = 'g1N2eRo5peUBZkEWAXJTCSIg0Pxg49FPI9a94KF939gi5mfysn'
+        
+        access_token = '1167253468165206016-rS16iSgUMZhPzNCEAlp60n5dUwc4Ds'
+        
+        access_token_secret = 'dvtBvEIrhnJMsLRchwpZzXIFOnInflOlABRUK4wn5fHdf'
 
         self.polarity = []
         self.count = 0
@@ -53,10 +56,15 @@ class TwitterClient():
 
         # set sentiment 
         if analysis.sentiment.polarity > 0: 
+            
             return 'positive'
+        
         elif analysis.sentiment.polarity == 0: 
+            
             return 'neutral'
+        
         else: 
+            
             return 'negative'
 
     def get_tweets(self): 
@@ -85,7 +93,9 @@ class TwitterClient():
                     
                     # if tweet has retweets, ensure that it is appended only once 
                     if parsed_tweet not in tweets: 
+                        
                         tweets.append(parsed_tweet) 
+                
                 else: 
                     
                     tweets.append(parsed_tweet) 
@@ -103,6 +113,7 @@ class TwitterClient():
         labels = ['Positive [' + str(self.positive) + '%]', 'Neutral [' + str(self.neutral) + '%]','Negative [' + str(self.negative) + '%]']
         
         sizes = [self.positive, self.neutral, self.negative]
+        
         colors = ['green', 'orange', 'red']
         
         plt.figure(1)
@@ -110,7 +121,9 @@ class TwitterClient():
         patches, texts = plt.pie(sizes, colors=colors, startangle=90)
         
         plt.legend(patches, labels, loc="best")
+        
         plt.title('pie - chart')
+        
         plt.axis('equal')
         
         plt.show()
@@ -122,11 +135,13 @@ class TwitterClient():
         axis = fig.add_subplot(1,1,1)
         
         x = np.array(range(0,len(self.polarity)))
+        
         y = np.array(self.polarity)
 
         axis.plot(x,y)
         
         plt.xlabel('tweet number')
+        
         plt.ylabel('polarity')
         
         plt.show()
@@ -138,6 +153,7 @@ class TwitterClient():
         plt.hist(self.polarity,bins=7,color='green',histtype = 'barstacked')
         
         plt.ylabel('number of tweets')
+        
         plt.xlabel('polarity of tweets')
         
         plt.show()
@@ -146,23 +162,30 @@ def cleartag():
     
     tag.delete(0,END)
 
+def Select_number_of_tweets(event = None):
+
+    return number_of_tweets.get()
+
 def main(): 
 
     user_input = str(tag.get())
 
     if(len(user_input)>1):
+        
         api.query = str(user_input)
 
-    api.count = 75
+    api.count = Select_number_of_tweets()
 
     api.polarity = []
 
     print(api.query,api.count,len(api.polarity))
 
     search_button.config(text = "fetching..")
+    
     search_button.config(state = DISABLED)
 
     clear_button.config(text = "Wait")
+    
     clear_button.config(state = DISABLED)
     
     # calling function to get tweets 
@@ -202,14 +225,17 @@ def main():
         print(tweet['text'])
 
     search_button.config(text = "Search")
+    
     search_button.config(state = NORMAL)
 
     clear_button.config(text = "Clear")
+    
     clear_button.config(state = NORMAL)
 
 def main_thread():
 
     thread = Thread(target = main)
+    
     thread.start()
 
 '''
@@ -246,40 +272,57 @@ if __name__ == "__main__":
     root.configure(background = "lightblue")
 
     label1 = Label(root,text="Twitter Sentiment Analysis",fg="blue",bg="skyblue",font=("",15,"bold"))
+    
     label1.pack(side=TOP,pady=20)
 
     twitter_img = PhotoImage(file="/home/aman/Documents/my_projects/Sentiment Analysis in python/twitter.png")
+    
     label2 = Label(root,image = twitter_img).pack()
 
     label3 = Label(root,text="Enter Twitter #tag to search",fg="red",bg="yellow",font=("",12,"bold"))
+    
     label3.pack(side=TOP,pady=10)
 
     tag = Entry(root,justify=CENTER,font = ("verdana","15","bold"))
+    
     tag.pack(side = TOP)
 
     frame = Frame(root,background="lightblue")
+    
     frame.pack()
 
     search_button = Button(frame,text="Search",fg="white",bg="black",height=1,width=10,font=("verdana",10,"bold"),command = main_thread)
+    
     search_button.pack(side = LEFT,padx=5,pady=5)
 
     clear_button = Button(frame,text="Clear",fg="white",bg="black",height=1,width=10,font=("verdana",10,"bold"),command = cleartag)
+    
     clear_button.pack(side = LEFT,padx=5,pady=5)
 
     label4 = Label(root,text="Select number of tweets to fetch from twitter",fg="red",bg="yellow",font=("",12,"bold"))
+    
     label4.pack(side=TOP,pady=10)
 
     Values = (50,75,100,150,200,250,500,750,1000)
 
-    tmp = StringVar()
+    number_of_tweets = IntVar()
 
-    choices = ttk.Combobox(root,textvariable = tmp,values=Values,height=10)
+    choices = ttk.Combobox(root,textvariable = number_of_tweets,height=10)
+
+    choices['values'] = Values
+    
     choices.pack()
 
+    choices.current(2)
+
+    choices.bind("<<ComboboxSelected>>",Select_number_of_tweets)
+
     label5 = Label(root,text="Select appropriate diagram to dislpay ",fg="red",bg="yellow",font=("",12,"bold"))
+    
     label5.pack(side=TOP,pady=10)
 
     bottomFrame = Frame(root,background="lightblue",width=700,height=150)
+    
     bottomFrame.pack(side = TOP,pady = 20)
 
     piechart_image = PhotoImage(file = "/home/aman/Documents/my_projects/Sentiment Analysis in python/piechart.png")
@@ -295,12 +338,15 @@ if __name__ == "__main__":
     histogram_image = histogram_image.subsample(2,2)
 
     piechart_button = Button(bottomFrame,image = piechart_image,command = api.plotPieChart)
+    
     piechart_button.pack(side = LEFT,padx=20)
 
     scatterplot_button = Button(bottomFrame, image = scatterplot_image,command = api.scatter_plot)
+    
     scatterplot_button.pack(side = LEFT,padx=20)
 
     histogram_button = Button(bottomFrame,image = histogram_image,command = api.plothistogram)
+    
     histogram_button.pack(side = LEFT,padx=20)
     '''
     if(flag):
