@@ -14,13 +14,13 @@ class TwitterClient():
 
     def __init__(self): 
  
-        consumer_key = 'If3ljZl8ECSi2v3IBxBg8iZEk'
+        consumer_key = '###################### Enter your key  #########################'
         
-        consumer_secret = 'g1N2eRo5peUBZkEWAXJTCSIg0Pxg49FPI9a94KF939gi5mfysn'
+        consumer_secret = '####################### Enter your key  ########################'
         
-        access_token = '1167253468165206016-rS16iSgUMZhPzNCEAlp60n5dUwc4Ds'
+        access_token = '########################### Enter your key  ####################'
         
-        access_token_secret = 'dvtBvEIrhnJMsLRchwpZzXIFOnInflOlABRUK4wn5fHdf'
+        access_token_secret = '########################### Enter your key  ####################'
 
         self.polarity = []
         self.count = 0
