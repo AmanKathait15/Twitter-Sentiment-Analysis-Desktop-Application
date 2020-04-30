@@ -1,26 +1,29 @@
-# imported module
 
-import re , tweepy 
+################################# imported module ###################################
+
+import re , tweepy
+import bs4,requests
 from tweepy import OAuthHandler 
 from textblob import TextBlob 
 from matplotlib import pyplot as plt
 from tkinter import *
 from tkinter import ttk
 from threading import Thread
-import numpy as np
+from numpy import array
+
 
 
 class TwitterClient(): 
 
     def __init__(self): 
  
-        consumer_key = '###################### Enter your key  #########################'
+        consumer_key = '###################### Enter Your Key Here ##############################'
         
-        consumer_secret = '####################### Enter your key  ########################'
+        consumer_secret = '###################### Enter Your Key Here ##############################'
         
-        access_token = '########################### Enter your key  ####################'
+        access_token = '###################### Enter Your Key Here ##############################'
         
-        access_token_secret = '########################### Enter your key  ####################'
+        access_token_secret = '###################### Enter Your Key Here ##############################'
 
         self.polarity = []
         self.count = 0
@@ -108,9 +111,15 @@ class TwitterClient():
             # print error (if any) 
             print("Error : " + str(e))
 
+            f = open("logbook.txt","a")
+
+            f.write("\n"+str(e))
+
+            f.close()
+
     def plotPieChart(self):
 
-        labels = ['Positive [' + str(self.positive) + '%]', 'Neutral [' + str(self.neutral) + '%]','Negative [' + str(self.negative) + '%]']
+        labels = ['Positive {:.2f} %'.format(self.positive) , 'Neutral {:.2f} %'.format(self.neutral) ,'Negative {:.2f} %'.format(self.negative)]
         
         sizes = [self.positive, self.neutral, self.negative]
         
@@ -134,9 +143,9 @@ class TwitterClient():
         
         axis = fig.add_subplot(1,1,1)
         
-        x = np.array(range(0,len(self.polarity)))
+        x = array(range(0,len(self.polarity)))
         
-        y = np.array(self.polarity)
+        y = array(self.polarity)
 
         axis.plot(x,y)
         
@@ -165,6 +174,14 @@ def cleartag():
 def Select_number_of_tweets(event = None):
 
     return number_of_tweets.get()
+
+def Select_trending_topic(event = None):
+
+    api.query = str(topic.get())
+
+    tag.delete(0,END)
+
+    tag.insert(0,api.query)
 
 def main(): 
 
@@ -197,7 +214,7 @@ def main():
     # percentage of positive tweets 
     api.positive = 100*len(ptweets)/len(tweets)
     
-    print("Positive tweets percentage: {} %".format(api.positive,'.2f'))
+    print("Positive tweets percentage: {:.2f} %".format(api.positive))
 
     # picking negative tweets from tweets 
     ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative'] 
@@ -205,12 +222,12 @@ def main():
     # percentage of negative tweets
     api.negative = 100*len(ntweets)/len(tweets)
     
-    print("Negative tweets percentage: {} %".format(api.negative,'.2f')) 
+    print("Negative tweets percentage: {:.2f} %".format(api.negative)) 
 
     # percentage of neutral tweets 
     api.neutral = 100 - api.positive - api.negative
     
-    print("Neutral tweets percentage: {} %".format(api.neutral,'.2f')) 
+    print("Neutral tweets percentage: {:.2f} %".format(api.neutral)) 
 
     # printing first 5 positive tweets 
     print("\n\nPositive tweets:") 
@@ -237,6 +254,128 @@ def main_thread():
     thread = Thread(target = main)
     
     thread.start()
+
+def get_html(url):
+
+    response = requests.get(url)
+
+    return response
+
+def get_detail():
+
+    try:
+
+        url = "https://trends24.in/india/"
+
+        response = get_html(url)
+
+        bs = bs4.BeautifulSoup(response.text,'html.parser')
+
+        tag = bs.find("div",class_ = "trend-card").find_all("a")
+
+        trending = []
+
+        for i in tag:
+
+            trending.append(i.get_text())
+
+        return trending
+
+    except Exception as e:
+        
+        print(e)
+
+        f = open("logbook.txt","a")
+
+        f.write("\n"+str(e))
+
+        f.close()
+
+def set_bg_to_grey():
+
+    root.configure(background="grey")
+
+    topframe.configure(background="grey")
+
+    set_bg_frame.configure(background="grey")
+
+    frame.configure(background="grey")
+
+    middleframe.configure(background="grey")
+
+    bottomFrame.configure(background="grey")
+
+def set_bg_to_red():
+
+    root.configure(background="red")
+
+    topframe.configure(background="red")
+
+    set_bg_frame.configure(background="red")
+
+    frame.configure(background="red")
+
+    middleframe.configure(background="red")
+
+    bottomFrame.configure(background="red")
+
+def set_bg_to_pink():
+
+    root.configure(background="pink")
+
+    topframe.configure(background="pink")
+
+    set_bg_frame.configure(background="pink")
+
+    frame.configure(background="pink")
+
+    middleframe.configure(background="pink")
+
+    bottomFrame.configure(background="pink")
+
+def set_bg_to_brown():
+
+    root.configure(background="brown")
+
+    topframe.configure(background="brown")
+
+    set_bg_frame.configure(background="brown")
+
+    frame.configure(background="brown")
+
+    middleframe.configure(background="brown")
+
+    bottomFrame.configure(background="brown")
+
+
+def set_bg_to_green():
+
+    root.configure(background="green")
+
+    topframe.configure(background="green")
+
+    set_bg_frame.configure(background="green")
+
+    frame.configure(background="green")
+
+    middleframe.configure(background="green")
+
+    bottomFrame.configure(background="green")
+
+def set_bg_to_blue():
+
+    root.configure(background="lightblue")
+
+    topframe.configure(background="lightblue")
+
+    set_bg_frame.configure(background="lightblue")
+
+    frame.configure(background="lightblue")
+
+    middleframe.configure(background="lightblue")
+
+    bottomFrame.configure(background="lightblue")
+
 
 '''
 def plotpiechart():
@@ -275,9 +414,99 @@ if __name__ == "__main__":
     
     label1.pack(side=TOP,pady=20)
 
-    twitter_img = PhotoImage(file="/home/aman/Documents/my_projects/Sentiment Analysis in python/twitter.png")
+    topframe = Frame(root,background="lightblue")
     
-    label2 = Label(root,image = twitter_img).pack()
+    topframe.pack()
+
+    set_bg_frame = Frame(topframe,background="lightblue",height=150,width=150)
+
+    set_bg_frame.pack(side = LEFT)
+
+    #Label(set_bg_frame,text="Select background color",fg="red",bg="blue",font=("",12,"bold")).pack()
+
+    darkcolor = Frame(set_bg_frame)
+
+    darkcolor.pack()
+
+    lightcolor = Frame(set_bg_frame)
+
+    lightcolor.pack()
+
+    red_image = PhotoImage(file = "red.png")
+    
+    brown_image = PhotoImage(file = "brown.png")
+    
+    pink_image = PhotoImage(file = "pink.png")
+
+    grey_image = PhotoImage(file = "grey.png")
+
+    green_image = PhotoImage(file = "green.png")
+
+    blue_image = PhotoImage(file = "blue.png")
+
+    red_image = red_image.subsample(4,4)
+    
+    brown_image = brown_image.subsample(4,4)
+    
+    pink_image = pink_image.subsample(4,4)
+
+    grey_image = grey_image.subsample(4,4)
+
+    green_image = green_image.subsample(4,4)
+
+    blue_image = blue_image.subsample(4,4)
+
+    red_button = Button(darkcolor,image = red_image,command = set_bg_to_red)
+    
+    red_button.pack(side = LEFT)
+
+    brown_button = Button(darkcolor, image = brown_image,command = set_bg_to_brown)
+    
+    brown_button.pack(side = LEFT)
+
+    green_button = Button(darkcolor,image = green_image,command = set_bg_to_green)
+    
+    green_button.pack(side = LEFT)
+
+    pink_button = Button(lightcolor,image = pink_image,command = set_bg_to_pink)
+    
+    pink_button.pack(side = LEFT)
+
+    grey_button = Button(lightcolor, image = grey_image,command = set_bg_to_grey)
+    
+    grey_button.pack(side = LEFT)
+
+    blue_button = Button(lightcolor,image = blue_image,command = set_bg_to_blue)
+    
+    blue_button.pack(side = LEFT)
+
+    twitter_img = PhotoImage(file="/home/aman/Documents/my_projects/Sentiment Analysis in python/twitter.png")
+
+    label2 = Label(topframe,image = twitter_img)
+
+    label2.pack(side = LEFT,padx = (100,60))
+
+    frame = Frame(topframe,background="lightblue")
+
+    frame.pack(side = LEFT)
+
+    label6 = Label(frame,text="Trending #tag",fg="red",bg="blue",font=("",12,"bold"))
+
+    label6.pack(side = TOP , pady = 10)
+
+    topic = StringVar()
+
+    trending_topics = ttk.Combobox(frame , textvariable = topic , width = 20, height = 10)
+
+    #tmp = ["game","movies","politics","lockdown","bitcoin"]
+
+    trending_topics['values'] = get_detail()
+
+    trending_topics.pack()
+
+    trending_topics.current(0)
+
+    trending_topics.bind("<<ComboboxSelected>>",Select_trending_topic)
 
     label3 = Label(root,text="Enter Twitter #tag to search",fg="red",bg="yellow",font=("",12,"bold"))
     
@@ -287,15 +516,15 @@ if __name__ == "__main__":
     
     tag.pack(side = TOP)
 
-    frame = Frame(root,background="lightblue")
+    middleframe = Frame(root,background="lightblue")
     
-    frame.pack()
+    middleframe.pack()
 
-    search_button = Button(frame,text="Search",fg="white",bg="black",height=1,width=10,font=("verdana",10,"bold"),command = main_thread)
+    search_button = Button(middleframe,text="Search",fg="white",bg="black",height=1,width=10,font=("verdana",10,"bold"),command = main_thread)
     
     search_button.pack(side = LEFT,padx=5,pady=5)
 
-    clear_button = Button(frame,text="Clear",fg="white",bg="black",height=1,width=10,font=("verdana",10,"bold"),command = cleartag)
+    clear_button = Button(middleframe,text="Clear",fg="white",bg="black",height=1,width=10,font=("verdana",10,"bold"),command = cleartag)
     
     clear_button.pack(side = LEFT,padx=5,pady=5)
 
