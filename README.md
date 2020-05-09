@@ -1,14 +1,17 @@
 
 
  ## TWITTER SENTIMENT ANALYSIS DESKTOP APPLICATION
- <br>
+ 
+ 
+ 
 *A GUI based desktop application in python using tkinter module . This application interacts with Twitter API using tweepy and fetch tweets from Twitter on the query given by user then using machine learning navie bayes classification technique we assign polarity to tweets then display result in statistics form in a graph*
-<br>
+
 ![final output screen shot](https://github.com/AmanKathait15/sentiment-analysis/blob/master/ss.png)
  
- <br>
+ 
  ## python module used
- <br>
+ 
+ 
  1 textblob\
  2 tweepy\
  3 bs4\
@@ -18,9 +21,8 @@
  7 matplotlib\
  8 numpy\
  9 re
- <br>
+ 
  ## installation
- <br>
  
 type command in terminal : **pip install textblob**  check latest version [here](https://pypi.org/project/textblob/)<br>
 type command in terminal : **pip install tweepy**  check latest version [here](https://pypi.org/project/tweepy/)<br>
