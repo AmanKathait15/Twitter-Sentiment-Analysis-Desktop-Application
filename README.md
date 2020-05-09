@@ -31,5 +31,12 @@ type command in terminal : **pip install requests**  check latest version [here]
 type command in terminal : **pip install matplotlib**  check latest version [here](https://pypi.org/project/matplotlib/)<br>
 type command in terminal : **pip install numpy**  check latest version [here](https://pypi.org/project/numpy/)<br>
  
+ ## How to use
  
+ step 1: Getting the authentication credentials
+ 
+ login to your twitter account and go to this [page](https://developer.twitter.com/en/apps)\
+ check [this](https://www.youtube.com/watch?v=3353Mgdme4c) vedio for more details
+ 
+ step 2: copy your authentication key which you get from step 1 to config file
  
