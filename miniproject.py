@@ -3,6 +3,9 @@
 
 import re , tweepy
 import bs4,requests
+import subprocess, sys
+import config
+
 from tweepy import OAuthHandler 
 from textblob import TextBlob 
 from matplotlib import pyplot as plt
@@ -12,18 +15,17 @@ from threading import Thread
 from numpy import array
 
 
-
 class TwitterClient(): 
 
     def __init__(self): 
  
-        consumer_key = '###################### Enter Your Key Here ##############################'
+        consumer_key = config.consumer_key
         
-        consumer_secret = '###################### Enter Your Key Here ##############################'
+        consumer_secret = config.consumer_secret
         
-        access_token = '###################### Enter Your Key Here ##############################'
+        access_token = config.access_token
         
-        access_token_secret = '###################### Enter Your Key Here ##############################'
+        access_token_secret = config.access_token_secret
 
         self.polarity = []
         self.count = 0
@@ -376,6 +378,32 @@ def set_bg_to_blue():
 
     bottomFrame.configure(background="lightblue")
 
+def open_twitter():
+
+    twitter_url = "https://twitter.com/"
+
+    if sys.platform.startswith('linux'):
+        
+        subprocess.Popen(['xdg-open', twitter_url],
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+    elif sys.platform.startswith('win32'):
+        
+        os.startfile(twitter_url)
+    
+    elif sys.platform.startswith('cygwin'):
+        
+        os.startfile(twitter_url)
+    
+    elif sys.platform.startswith('darwin'):
+        
+        subprocess.Popen(['open', twitter_url],
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    else:
+        
+        subprocess.Popen(['xdg-open', twitter_url],
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
 
 '''
 def plotpiechart():
@@ -480,11 +508,13 @@ if __name__ == "__main__":
     
     blue_button.pack(side = LEFT)
 
-    twitter_img = PhotoImage(file="/home/aman/Documents/my_projects/Sentiment Analysis in python/twitter.png")
+    twitter_img = PhotoImage(file="twitter.png")
 
-    label2 = Label(topframe,image = twitter_img)
+    twitter_img = twitter_img.subsample(1,1)
 
-    label2.pack(side = LEFT,padx = (100,60))
+    twitter_button = Button(topframe,image = twitter_img,command = open_twitter)
+
+    twitter_button.pack(side = LEFT,padx = (100,60))
 
     frame = Frame(topframe,background="lightblue")
 
