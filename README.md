@@ -42,3 +42,12 @@ type command in terminal : **pip install numpy**  check latest version [here](ht
 
  step 3: run miniproject.py file\
  Note: put all image file in same folder where miniproject.py file 
+ 
+ ## References
+ 
+ [https://docs.python.org/3/library/tkinter.html](https://docs.python.org/3/library/tkinter.html)\
+ [https://towardsdatascience.com/twitter-sentiment-analysis-using-fasttext-9ccd04465597](https://towardsdatascience.com/twitter-sentiment-analysis-using-fasttext-9ccd04465597)\
+ [https://towardsdatascience.com/twitter-sentiment-analysis-classification-using-nltk-python-fa912578614c](https://towardsdatascience.com/twitter-sentiment-analysis-classification-using-nltk-python-fa912578614c)\
+ [https://textblob.readthedocs.io/en/dev/](https://textblob.readthedocs.io/en/dev/)\
+ [https://www.youtube.com/watch?v=eFdPGpny_hY](https://www.youtube.com/watch?v=eFdPGpny_hY)\
+ [https://pypi.org/project/googletrans/](https://pypi.org/project/googletrans/)\
