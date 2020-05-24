@@ -51,3 +51,6 @@ type command in terminal : **pip install numpy**  check latest version [here](ht
  [https://textblob.readthedocs.io/en/dev/](https://textblob.readthedocs.io/en/dev/)\
  [https://www.youtube.com/watch?v=eFdPGpny_hY](https://www.youtube.com/watch?v=eFdPGpny_hY)\
  [https://pypi.org/project/googletrans/](https://pypi.org/project/googletrans/)\
+ [https://textblob.readthedocs.io/en/dev/_modules/textblob/classifiers.html](https://textblob.readthedocs.io/en/dev/_modules/textblob/classifiers.html)\
+ [https://textblob.readthedocs.io/en/dev/classifiers.html](https://textblob.readthedocs.io/en/dev/classifiers.html)\
+ [https://www.geeksforgeeks.org/saving-a-machine-learning-model/](https://www.geeksforgeeks.org/saving-a-machine-learning-model/)
