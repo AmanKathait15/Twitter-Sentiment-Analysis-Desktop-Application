@@ -40,5 +40,5 @@ type command in terminal : **pip install numpy**  check latest version [here](ht
  step 2: copy your authentication key which you get from step 1 to config file
  ![config file ss](https://github.com/AmanKathait15/sentiment-analysis/blob/master/key.png)
 
- step 3: run miniproject.py file
+ step 3: run miniproject.py file\
  Note: put all image file in same folder where miniproject.py file 
