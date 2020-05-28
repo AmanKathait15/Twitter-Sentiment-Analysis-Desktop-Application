@@ -6,7 +6,7 @@
  
 *A GUI based desktop application in python using tkinter module . This application interacts with Twitter API using tweepy and fetch tweets from Twitter on the query given by user then using machine learning navie bayes classification technique we assign polarity to tweets then display result in statistics form in a graph*
 
-![final output screen shot](https://github.com/AmanKathait15/sentiment-analysis/blob/master/ss.png)
+![final output screen shot](https://github.com/AmanKathait15/sentiment-analysis/blob/master/readme_images/ss.png)
  
  
  ## python module used
