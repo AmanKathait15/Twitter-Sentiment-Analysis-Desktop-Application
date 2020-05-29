@@ -37,11 +37,11 @@ type command in terminal : **pip install numpy**  check latest version [here](ht
  login to your twitter account and go to this [page](https://developer.twitter.com/en/apps)\
  check [this](https://www.youtube.com/watch?v=3353Mgdme4c) vedio for more details
  
- step 2: copy your authentication key which you get from step 1 to config file
+ step 2: copy your authentication key which you get from step 1 to config.py file
  ![config file ss](https://github.com/AmanKathait15/Twitter-Sentiment-Analysis-Desktop-Application/blob/master/readme_images/key.png)
 
- step 3: run miniproject.py file\
- Note: put all image file in same folder where miniproject.py file 
+ step 3: run main.py file\
+         >> python3 main.py
  
  ## References
  
