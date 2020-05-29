@@ -19,7 +19,7 @@
  5 tkinter\
  6 threading\
  7 matplotlib\
- 8 numpy\
+ 8 numpy
  
  ## installation
  
