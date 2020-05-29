@@ -378,6 +378,62 @@ def set_bg_to_blue():
 
     bottomFrame.configure(background="lightblue")
 
+def set_bg_to_orange():
+
+    root.configure(background="orange")
+
+    topframe.configure(background="orange")
+
+    set_bg_frame.configure(background="orange")
+
+    frame.configure(background="orange")
+
+    middleframe.configure(background="orange")
+
+    bottomFrame.configure(background="orange")
+
+def set_bg_to_violet():
+
+    root.configure(background="violet")
+
+    topframe.configure(background="violet")
+
+    set_bg_frame.configure(background="violet")
+
+    frame.configure(background="violet")
+
+    middleframe.configure(background="violet")
+
+    bottomFrame.configure(background="violet")
+
+def set_bg_to_yellow():
+
+    root.configure(background="yellow")
+
+    topframe.configure(background="yellow")
+
+    set_bg_frame.configure(background="yellow")
+
+    frame.configure(background="yellow")
+
+    middleframe.configure(background="yellow")
+
+    bottomFrame.configure(background="yellow")
+
+def set_bg_to_lightgreen():
+
+    root.configure(background="lightgreen")
+
+    topframe.configure(background="lightgreen")
+
+    set_bg_frame.configure(background="lightgreen")
+
+    frame.configure(background="lightgreen")
+
+    middleframe.configure(background="lightgreen")
+
+    bottomFrame.configure(background="lightgreen")
+
 def open_twitter():
 
     twitter_url = "https://twitter.com/"
@@ -460,17 +516,25 @@ if __name__ == "__main__":
 
     lightcolor.pack()
 
-    red_image = PhotoImage(file = "red.png")
+    red_image = PhotoImage(file = "images/red.png")
     
-    brown_image = PhotoImage(file = "brown.png")
+    brown_image = PhotoImage(file = "images/brown.png")
     
-    pink_image = PhotoImage(file = "pink.png")
+    pink_image = PhotoImage(file = "images/pink.png")
 
-    grey_image = PhotoImage(file = "grey.png")
+    grey_image = PhotoImage(file = "images/grey.png")
 
-    green_image = PhotoImage(file = "green.png")
+    green_image = PhotoImage(file = "images/green.png")
 
-    blue_image = PhotoImage(file = "blue.png")
+    blue_image = PhotoImage(file = "images/blue.png")
+
+    orange_image = PhotoImage(file = "images/orange.png")
+
+    violet_image = PhotoImage(file = "images/violet.png")
+
+    yellow_image = PhotoImage(file = "images/yellow.png")
+
+    lightgreen_image = PhotoImage(file = "images/lightgreen.png")
 
     red_image = red_image.subsample(4,4)
     
@@ -483,6 +547,14 @@ if __name__ == "__main__":
     green_image = green_image.subsample(4,4)
 
     blue_image = blue_image.subsample(4,4)
+
+    orange_image = orange_image.subsample(4,4)
+
+    violet_image = violet_image.subsample(4,4)
+
+    yellow_image = yellow_image.subsample(4,4)
+
+    lightgreen_image = lightgreen_image.subsample(4,4)
 
     red_button = Button(darkcolor,image = red_image,command = set_bg_to_red)
     
@@ -508,13 +580,29 @@ if __name__ == "__main__":
     
     blue_button.pack(side = LEFT)
 
-    twitter_img = PhotoImage(file="twitter.png")
+    orange_button = Button(darkcolor,image = orange_image,command = set_bg_to_orange)
+    
+    orange_button.pack(side = LEFT)
+
+    violet_button = Button(darkcolor,image = violet_image,command = set_bg_to_violet)
+    
+    violet_button.pack(side = LEFT)
+
+    yellow_button = Button(lightcolor,image = yellow_image,command = set_bg_to_yellow)
+    
+    yellow_button.pack(side = LEFT)
+
+    lightgreen_button = Button(lightcolor,image = lightgreen_image,command = set_bg_to_lightgreen)
+    
+    lightgreen_button.pack(side = LEFT)
+
+    twitter_img = PhotoImage(file="images/twitter.png")
 
     twitter_img = twitter_img.subsample(1,1)
 
     twitter_button = Button(topframe,image = twitter_img,command = open_twitter)
 
-    twitter_button.pack(side = LEFT,padx = (100,60))
+    twitter_button.pack(side = LEFT,padx = (40,60))
 
     frame = Frame(topframe,background="lightblue")
 
@@ -584,11 +672,11 @@ if __name__ == "__main__":
     
     bottomFrame.pack(side = TOP,pady = 20)
 
-    piechart_image = PhotoImage(file = "/home/aman/Documents/my_projects/Sentiment Analysis in python/piechart.png")
+    piechart_image = PhotoImage(file = "images/piechart.png")
     
-    scatterplot_image = PhotoImage(file = "/home/aman/Documents/my_projects/Sentiment Analysis in python/scatter.png")
+    scatterplot_image = PhotoImage(file = "images/scatter.png")
     
-    histogram_image = PhotoImage(file = "/home/aman/Documents/my_projects/Sentiment Analysis in python/histogram.png")
+    histogram_image = PhotoImage(file = "images/histogram.png")
 
     piechart_image = piechart_image.subsample(2,2)
     
@@ -607,14 +695,5 @@ if __name__ == "__main__":
     histogram_button = Button(bottomFrame,image = histogram_image,command = api.plothistogram)
     
     histogram_button.pack(side = LEFT,padx=20)
-    '''
-    if(flag):
-        piechart_button.config(state = DISABLED)
-        scatterplot_button.config(state = DISABLED)
-        histogram_button.config(state = DISABLED)
-    else:
-        piechart_button.config(state = NORMAL)
-        scatterplot_button.config(state = NORMAL)
-        histogram_button.config(state = NORMAL)'''
 
     root.mainloop()
