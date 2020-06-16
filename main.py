@@ -1,17 +1,23 @@
 
-################################# imported module ###################################
 
-import re , tweepy
-import bs4,requests
+import re ,tweepy
+
 import subprocess, sys
+
 import config
 
 from tweepy import OAuthHandler 
+
 from textblob import TextBlob 
+
 from matplotlib import pyplot as plt
+
 from tkinter import *
+
 from tkinter import ttk
+
 from threading import Thread
+
 from numpy import array
 
 
@@ -28,22 +34,31 @@ class TwitterClient():
         access_token_secret = config.access_token_secret
 
         self.polarity = []
+        
         self.count = 0
+        
         self.query = 'lockdown'
+        
         self.positive = 0
+        
         self.negative = 0
+        
         self.neutral = 0
 
         # attempt authentication 
+        
         try: 
             
             # create OAuthHandler object 
+            
             self.auth = OAuthHandler(consumer_key, consumer_secret) 
             
             # set access token and secret 
+            
             self.auth.set_access_token(access_token, access_token_secret) 
             
             # create tweepy API object to fetch tweets 
+            
             self.api = tweepy.API(self.auth) 
         
         except: 
@@ -57,9 +72,11 @@ class TwitterClient():
     def get_tweet_sentiment(self, tweet): 
  
         analysis = TextBlob(self.clean_tweet(tweet))
+        
         self.polarity.append(analysis.sentiment.polarity)
 
         # set sentiment 
+        
         if analysis.sentiment.polarity > 0: 
             
             return 'positive'
@@ -79,24 +96,31 @@ class TwitterClient():
         try: 
             
             # call twitter api to fetch tweets 
+            
             fetched_tweets = self.api.search(q = self.query, count = self.count) 
 
             # parsing tweets one by one 
+            
             for tweet in fetched_tweets: 
                 
                 # empty dictionary to store required params of a tweet 
+                
                 parsed_tweet = {} 
 
                 # saving text of tweet 
+                
                 parsed_tweet['text'] = tweet.text 
                 
                 # saving sentiment of tweet 
+                
                 parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet.text) 
 
                 # appending parsed tweet to tweets list 
+                
                 if tweet.retweet_count > 0: 
                     
                     # if tweet has retweets, ensure that it is appended only once 
+                    
                     if parsed_tweet not in tweets: 
                         
                         tweets.append(parsed_tweet) 
@@ -106,11 +130,13 @@ class TwitterClient():
                     tweets.append(parsed_tweet) 
 
             # return parsed tweets 
+            
             return tweets 
 
         except tweepy.TweepError as e: 
             
             # print error (if any) 
+            
             print("Error : " + str(e))
 
             f = open("logbook.txt","a")
@@ -208,39 +234,49 @@ def main():
     clear_button.config(state = DISABLED)
     
     # calling function to get tweets 
+    
     tweets = api.get_tweets() 
     
     # picking positive tweets from tweets 
+    
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive'] 
     
     # percentage of positive tweets 
+    
     api.positive = 100*len(ptweets)/len(tweets)
     
     print("Positive tweets percentage: {:.2f} %".format(api.positive))
 
     # picking negative tweets from tweets 
+    
     ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative'] 
     
     # percentage of negative tweets
+    
     api.negative = 100*len(ntweets)/len(tweets)
     
     print("Negative tweets percentage: {:.2f} %".format(api.negative)) 
 
     # percentage of neutral tweets 
+    
     api.neutral = 100 - api.positive - api.negative
     
     print("Neutral tweets percentage: {:.2f} %".format(api.neutral)) 
 
     # printing first 5 positive tweets 
+    
     print("\n\nPositive tweets:") 
     
     for tweet in ptweets[:10]: 
+        
         print(tweet['text'])
 
     # printing first 5 negative tweets 
+    
     print("\n\nNegative tweets:") 
     
     for tweet in ntweets[:10]: 
+        
         print(tweet['text'])
 
     search_button.config(text = "Search")
@@ -293,147 +329,6 @@ def get_detail():
 
         f.close()
 
-def set_bg_to_grey():
-
-    root.configure(background="grey")
-
-    topframe.configure(background="grey")
-
-    set_bg_frame.configure(background="grey")
-
-    frame.configure(background="grey")
-
-    middleframe.configure(background="grey")
-
-    bottomFrame.configure(background="grey")
-
-def set_bg_to_red():
-
-    root.configure(background="red")
-
-    topframe.configure(background="red")
-
-    set_bg_frame.configure(background="red")
-
-    frame.configure(background="red")
-
-    middleframe.configure(background="red")
-
-    bottomFrame.configure(background="red")
-
-def set_bg_to_pink():
-
-    root.configure(background="pink")
-
-    topframe.configure(background="pink")
-
-    set_bg_frame.configure(background="pink")
-
-    frame.configure(background="pink")
-
-    middleframe.configure(background="pink")
-
-    bottomFrame.configure(background="pink")
-
-def set_bg_to_brown():
-
-    root.configure(background="brown")
-
-    topframe.configure(background="brown")
-
-    set_bg_frame.configure(background="brown")
-
-    frame.configure(background="brown")
-
-    middleframe.configure(background="brown")
-
-    bottomFrame.configure(background="brown")
-
-
-def set_bg_to_green():
-
-    root.configure(background="green")
-
-    topframe.configure(background="green")
-
-    set_bg_frame.configure(background="green")
-
-    frame.configure(background="green")
-
-    middleframe.configure(background="green")
-
-    bottomFrame.configure(background="green")
-
-def set_bg_to_blue():
-
-    root.configure(background="lightblue")
-
-    topframe.configure(background="lightblue")
-
-    set_bg_frame.configure(background="lightblue")
-
-    frame.configure(background="lightblue")
-
-    middleframe.configure(background="lightblue")
-
-    bottomFrame.configure(background="lightblue")
-
-def set_bg_to_orange():
-
-    root.configure(background="orange")
-
-    topframe.configure(background="orange")
-
-    set_bg_frame.configure(background="orange")
-
-    frame.configure(background="orange")
-
-    middleframe.configure(background="orange")
-
-    bottomFrame.configure(background="orange")
-
-def set_bg_to_violet():
-
-    root.configure(background="violet")
-
-    topframe.configure(background="violet")
-
-    set_bg_frame.configure(background="violet")
-
-    frame.configure(background="violet")
-
-    middleframe.configure(background="violet")
-
-    bottomFrame.configure(background="violet")
-
-def set_bg_to_yellow():
-
-    root.configure(background="yellow")
-
-    topframe.configure(background="yellow")
-
-    set_bg_frame.configure(background="yellow")
-
-    frame.configure(background="yellow")
-
-    middleframe.configure(background="yellow")
-
-    bottomFrame.configure(background="yellow")
-
-def set_bg_to_lightgreen():
-
-    root.configure(background="lightgreen")
-
-    topframe.configure(background="lightgreen")
-
-    set_bg_frame.configure(background="lightgreen")
-
-    frame.configure(background="lightgreen")
-
-    middleframe.configure(background="lightgreen")
-
-    bottomFrame.configure(background="lightgreen")
-
 def open_twitter():
 
     twitter_url = "https://twitter.com/"
@@ -460,28 +355,10 @@ def open_twitter():
         subprocess.Popen(['xdg-open', twitter_url],
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-
-'''
-def plotpiechart():
-
-    thread = Thread(target = api.plotPieChart)
-    thread.start()
-
-def scatter_plot():
-
-    thread = Thread(target = api.plotbargraph)
-    thread.start()
-
-def plothistogram():
-
-    thread = Thread(target = api.plothistogram)
-    thread.start()'''
-
 if __name__ == "__main__": 
 
-    # calling main function 
-
     # creating object of TwitterClient Class 
+    
     api = TwitterClient()
     
     root = Tk()
@@ -497,134 +374,14 @@ if __name__ == "__main__":
     label1 = Label(root,text="Twitter Sentiment Analysis",fg="blue",bg="skyblue",font=("",15,"bold"))
     
     label1.pack(side=TOP,pady=20)
-
-    topframe = Frame(root,background="lightblue")
     
-    topframe.pack()
-
-    set_bg_frame = Frame(topframe,background="lightblue",height=150,width=150)
-
-    set_bg_frame.pack(side = LEFT)
-
-    #Label(set_bg_frame,text="Select background color",fg="red",bg="blue",font=("",12,"bold")).pack()
-
-    darkcolor = Frame(set_bg_frame)
-
-    darkcolor.pack()
-
-    lightcolor = Frame(set_bg_frame)
-
-    lightcolor.pack()
-
-    red_image = PhotoImage(file = "images/red.png")
-    
-    brown_image = PhotoImage(file = "images/brown.png")
-    
-    pink_image = PhotoImage(file = "images/pink.png")
-
-    grey_image = PhotoImage(file = "images/grey.png")
-
-    green_image = PhotoImage(file = "images/green.png")
-
-    blue_image = PhotoImage(file = "images/blue.png")
-
-    orange_image = PhotoImage(file = "images/orange.png")
-
-    violet_image = PhotoImage(file = "images/violet.png")
-
-    yellow_image = PhotoImage(file = "images/yellow.png")
-
-    lightgreen_image = PhotoImage(file = "images/lightgreen.png")
-
-    red_image = red_image.subsample(4,4)
-    
-    brown_image = brown_image.subsample(4,4)
-    
-    pink_image = pink_image.subsample(4,4)
-
-    grey_image = grey_image.subsample(4,4)
-
-    green_image = green_image.subsample(4,4)
-
-    blue_image = blue_image.subsample(4,4)
-
-    orange_image = orange_image.subsample(4,4)
-
-    violet_image = violet_image.subsample(4,4)
-
-    yellow_image = yellow_image.subsample(4,4)
-
-    lightgreen_image = lightgreen_image.subsample(4,4)
-
-    red_button = Button(darkcolor,image = red_image,command = set_bg_to_red)
-    
-    red_button.pack(side = LEFT)
-
-    brown_button = Button(darkcolor, image = brown_image,command = set_bg_to_brown)
-    
-    brown_button.pack(side = LEFT)
-
-    green_button = Button(darkcolor,image = green_image,command = set_bg_to_green)
-    
-    green_button.pack(side = LEFT)
-
-    pink_button = Button(lightcolor,image = pink_image,command = set_bg_to_pink)
-    
-    pink_button.pack(side = LEFT)
-
-    grey_button = Button(lightcolor, image = grey_image,command = set_bg_to_grey)
-    
-    grey_button.pack(side = LEFT)
-
-    blue_button = Button(lightcolor,image = blue_image,command = set_bg_to_blue)
-    
-    blue_button.pack(side = LEFT)
-
-    orange_button = Button(darkcolor,image = orange_image,command = set_bg_to_orange)
-    
-    orange_button.pack(side = LEFT)
-
-    violet_button = Button(darkcolor,image = violet_image,command = set_bg_to_violet)
-    
-    violet_button.pack(side = LEFT)
-
-    yellow_button = Button(lightcolor,image = yellow_image,command = set_bg_to_yellow)
-    
-    yellow_button.pack(side = LEFT)
-
-    lightgreen_button = Button(lightcolor,image = lightgreen_image,command = set_bg_to_lightgreen)
-    
-    lightgreen_button.pack(side = LEFT)
-
     twitter_img = PhotoImage(file="images/twitter.png")
 
     twitter_img = twitter_img.subsample(1,1)
 
-    twitter_button = Button(topframe,image = twitter_img,command = open_twitter)
+    twitter_button = Button(root,image = twitter_img,command = open_twitter)
 
-    twitter_button.pack(side = LEFT,padx = (40,60))
-
-    frame = Frame(topframe,background="lightblue")
-
-    frame.pack(side = LEFT)
-
-    label6 = Label(frame,text="Trending #tag",fg="red",bg="blue",font=("",12,"bold"))
-
-    label6.pack(side = TOP , pady = 10)
-
-    topic = StringVar()
-
-    trending_topics = ttk.Combobox(frame , textvariable = topic , width = 20, height = 10)
-
-    #tmp = ["game","movies","politics","lockdown","bitcoin"]
-
-    trending_topics['values'] = get_detail()
-
-    trending_topics.pack()
-
-    trending_topics.current(0)
-
-    trending_topics.bind("<<ComboboxSelected>>",Select_trending_topic)
+    twitter_button.pack(side = TOP)
 
     label3 = Label(root,text="Enter Twitter #tag to search",fg="red",bg="yellow",font=("",12,"bold"))
     
