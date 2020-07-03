@@ -29,6 +29,8 @@ type command in terminal : **pip install bs4**  check latest version [here](http
 type command in terminal : **pip install requests**  check latest version [here](https://pypi.org/project/requests/)<br>
 type command in terminal : **pip install matplotlib**  check latest version [here](https://pypi.org/project/matplotlib/)<br>
 type command in terminal : **pip install numpy**  check latest version [here](https://pypi.org/project/numpy/)<br>
+type command in terminal : **pip install googletrans**  check latest version [here](https://pypi.org/project/googletrans/)<br>
+type command in terminal : **pip install emoji**  check latest version [here](https://pypi.org/project/emoji/)<br>
  
  ## How to use
  
